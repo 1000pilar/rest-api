@@ -49,3 +49,7 @@ Route | HTTP | Description
 /api/users | POST | create users admin only
 /api/users/:id | DELETE | Delete user (admin only)
 /api/users/:id | PUT | Update a user with new info (admin and authenticate user)
+
+
+## note
+> when using npm passport-local change callback result from database to Promise

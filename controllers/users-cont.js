@@ -1,6 +1,7 @@
 var models = require('../models')
 var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 module.exports = {
   signup : (req, res) =>{
@@ -28,7 +29,7 @@ module.exports = {
         name: user.name,
         id: user.id,
         role: user.role
-      }, 'rahasia', { expiresIn: '1d'})
+      }, process.env.SECRET, { expiresIn: '1d'})
       res.send(token)
     }
   },
@@ -42,7 +43,7 @@ module.exports = {
     })
   },
   readOne: (req, res)=>{
-    models.User.findOne(body.params.id)
+    models.User.findOne({where: {id: req.params.id}})
     .then((users)=>{
       res.send(users)
     })
@@ -56,8 +57,8 @@ module.exports = {
         id: req.params.id
       }
     })
-    .then(userId=>{
-      res.send(userId)
+    .then(()=>{
+      res.send(`update user id ${req.params.id} succesfull`)
     })
     .catch((err)=>{
       res.send(err)
@@ -70,7 +71,7 @@ module.exports = {
       }
     })
     .then(()=>{
-      res.send(`delete user id ${req.params.id} succed`)
+      res.send(`delete user id ${req.params.id} succesfull`)
     })
     .catch(err=>{
       res.send(err)

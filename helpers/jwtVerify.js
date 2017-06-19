@@ -1,22 +1,27 @@
 var jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 
 module.exports = {
   jwtVerifyAdmin: (req, res, next)=>{
-    jwt.veryfy(req.headers.token, 'rahasia', (err, decoded)=>{
-      if(decoded.role == 'admin') {
+    jwt.verify(req.headers.token, process.env.SECRET, (err, decoded)=>{
+      if(decoded.role === undefined) {
+        res.send({message: `your not authorize to read,create,update,delete user`})
+      } else if (decoded.role == 'admin'){
         next()
       } else {
-        res.send({message: `your not authorize to read,create,update,delete user`})
+        res.send({message: `your not authorize admin or user`})
       }
     })
   },
   jwtVerifyAdminAndUser: (req, res, next)=>{
-    jwt.veryfy(req.headers.token, 'rahasia', (err, decoded)=>{
-      if(decoded.role == 'admin' || decoded.id == req.params.id) {
+    jwt.verify(req.headers.token, process.env.SECRET, (err, decoded)=>{
+      if(decoded.role === undefined) {
+        res.send({message: `your not authorize to read,create,update,delete user`})
+      } else if (decoded.role == 'admin' || decoded.role == 'user') {
         next()
       } else {
-        res.send({message: `your not make changes`})
+        res.send({message: `your not authorize admin or user`})
       }
     })
   }
