@@ -1,0 +1,31 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "## Installations - [ ] express * npm install --save express * configuration   * var express = require('express') - [ ] passport * npm install --save passport * configuration   * var passport = require('passport') - [ ] local-passport * npm install --save local-passport * configuration   * var LocalStrategy = require('passport-local') - [ ] jsonwebtoken * npm install --save jsonwebtoken * configuration   * var jwt = require('jsonwebtoken') - [ ] sequelize * npm install --save sequelize * configuration   * var sequelize = require('sequelize')",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1000pilar/rest-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1000pilar/rest-api/issues"
+  },
+  "homepage": "https://github.com/1000pilar/rest-api#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pg": "^6.2.4",
+    "sequelize": "^4.1.0",
+    "sequelize-cli": "^2.7.0"
+  }
+}
