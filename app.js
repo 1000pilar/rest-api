@@ -2,7 +2,7 @@ var express = require('express')
 var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bodyParser = require('body-parser')
-var User = require('./models/user.js')
+var models = require('./models')
 var bcrypt = require('bcrypt')
 
 var users = require('./routes/api.js')
@@ -11,10 +11,16 @@ var app = express()
 
 passport.use(new LocalStrategy(
   function(username, password, done){
-    User.findOne({ username: username }, function (err, user){
-      if (err) {return done(err)}
-      if (!user) {return done(null, {message: `username or password invalid`})}
-      if (!bcrypt.compareSync(password, user.password)) {return done(null, {message: `username or password invalid`})}
+    // console.log(username);
+    // console.log(password);
+    models.User.findOne({ where: {username: username }})
+    .then((user)=>{
+      console.log(user.dataValues);
+      if (!user.dataValues) {return done(null, {message: `username or password invalid`})}
+      // console.log(user.dataValues.password);
+      // console.log(!bcrypt.compareSync(password, user.dataValues.password));
+      if (!bcrypt.compareSync(password, user.dataValues.password)) {return done(null, {message: `password invalid`})}
+      return done(null, user);
     })
   }
 ))
