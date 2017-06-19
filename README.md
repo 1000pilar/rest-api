@@ -52,4 +52,4 @@ Route | HTTP | Description
 
 
 ## note
-> when using npm passport-local change callback result from database to Promise
+> when using npm passport-local change callback function to Promise
