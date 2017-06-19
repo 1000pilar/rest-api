@@ -26,5 +26,15 @@ module.exports = {
     .catch((err)=>{
       res.send(err)
     })
+  },
+  update: (req, res)=>{
+    models.User.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(user=>{
+      res.send(user)
+    })
   }
 }
