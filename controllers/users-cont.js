@@ -33,8 +33,24 @@ module.exports = {
         id: req.params.id
       }
     })
-    .then(user=>{
-      res.send(user)
+    .then(userId=>{
+      res.send(userId)
+    })
+    .catch((err)=>{
+      res.send(err)
+    })
+  },
+  deleteUser: (req, res)=>{
+    models.User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(()=>{
+      res.send(`delete user id ${req.params.id} succed`)
+    })
+    .catch(err=>{
+      res.send(err)
     })
   }
 }
