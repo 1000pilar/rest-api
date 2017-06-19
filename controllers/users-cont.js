@@ -17,5 +17,14 @@ module.exports = {
     .catch((err)=>{
       res.send(err)
     })
+  },
+  read: (req, res)=>{
+    models.User.findAll()
+    .then((users)=>{
+      res.send(users)
+    })
+    .catch((err)=>{
+      res.send(err)
+    })
   }
 }
